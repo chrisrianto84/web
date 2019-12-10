@@ -1,4 +1,4 @@
-# web
+# Chord Recognition Using CNN Model on Keras
 
 1. Install Python 3.7.3
 
