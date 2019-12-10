@@ -1,0 +1,325 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>CHORD RECOGNITION &mdash; Recognize Your Chord In One Click, Chris Muladi Rianto 535160047</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Chord Recognition by Chris Muladi Rianto" />
+	<meta name="keywords"
+		content="chord recognition, chord recognition application, record online, chris muladi rianto, 535160047" />
+	<meta name="author" content="Chris Muladi Rianto" />
+	<link rel="shortcut icon" href="{{ url_for('static',filename='images/favicon.ico') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/normalize.css') }}" />
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/demo.css') }}" />
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/component.css') }}" />
+	<!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/record.css') }}" /> -->
+
+	<!-- <script src="{{ url_for('static',filename='js/record.js') }}"></script> -->
+	<!-- Facebook and Twitter integration
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" /> -->
+
+	<link href='https://fonts.googleapis.com/css?family=Raleway:400,300,600,400italic,700' rel='stylesheet'
+		type='text/css'>
+
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="{{ url_for('static',filename='styles/animate.css') }}">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="{{ url_for('static',filename='styles/icomoon.css') }}">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="{{ url_for('static',filename='styles/bootstrap.css') }}">
+
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href="{{ url_for('static',filename='styles/magnific-popup.css') }}">
+
+	<!-- Owl Carousel  -->
+	<link rel="stylesheet" href="{{ url_for('static',filename='styles/owl.carousel.min.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static',filename='styles/owl.theme.default.min.css') }}">
+
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="{{ url_for('static',filename='styles/style.css') }}">
+
+	<!-- Modernizr JS -->
+	<script src="{{ url_for('static',filename='js/modernizr-2.6.2.min.js') }}"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+
+</head>
+
+<body>
+
+	<div class="gtco-loader"></div>
+
+	<div id="page">
+		<nav class="gtco-nav" role="navigation">
+			<div class="gtco-container">
+				<div class="row">
+					<div class="col-xs-2">
+						<div id="gtco-logo"><a href="{{ url_for('home') }}">Chord Recognition.</a></div>
+					</div>
+					<div class="col-xs-10 text-right menu-1">
+						<ul>
+							<li><a href="{{ url_for('home') }}">Home</a></li>
+							<li class="active"><a href="{{ url_for('chordRecognition') }}">Chord Recognition</a></li>
+							<li><a href="{{ url_for('about') }}">About</a></li>
+							<!-- <li class="has-dropdown">
+								<a href="#">Dropdown</a>
+								<ul class="dropdown">
+									<li><a href="#">HTML5</a></li>
+									<li><a href="#">CSS3</a></li>
+									<li><a href="#">Sass</a></li>
+									<li><a href="#">jQuery</a></li>
+								</ul>
+							</li> -->
+							<!-- <li><a href="contact.html">Contact</a></li> -->
+						</ul>
+					</div>
+				</div>
+
+			</div>
+		</nav>
+
+		<header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner"
+			style="background-image:url(static/images/pianoHD.jpeg);">
+			<div class="overlay"></div>
+			<div class="gtco-container">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2 text-center">
+						<div class="display-t">
+							<div class="display-tc animate-box" data-animate-effect="fadeIn">
+								<h1>Recognize Chord for Your Audio Below</h1>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<div class="gtco-section">
+			<div class="gtco-container">
+				<div class="row">
+					<div class="col-md-11 animate-box">
+						<h1>Chord Recognition</h2>
+							<form action="/chordRecognition" method="POST" enctype="multipart/form-data">
+								<div class="row form-group">
+									<div class="container">
+										<br>
+										<h3>Please Input an Audio File</h3>
+										{% if value=='1' or value=='2' or value=='3' %}
+										<p style="color:black">Audio file must be in .wav or .mp3 format</p>
+										{% elif value=='4' %}
+										<p style="color:#EE2A00">Invalid Data Type! 
+										Data Must Be in .mp3 ow .wav Format</p>
+										{% endif %}
+										<div class="row">
+											<div class="col-xs-3">
+												<input type="file" name="audio_file" id="audio_file"
+													class="inputfile inputfile-1"
+													data-multiple-caption="{count} files selected" multiple />
+												<label for="audio_file"><svg xmlns="http://www.w3.org/2000/svg"
+														width="20" height="17" viewBox="0 0 20 17">
+														<path
+															d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z" />
+													</svg> <span>Choose a file&hellip;</span></label>
+											</div>
+											<div class="col-xs-6">
+												<button type="submit" class="btn btn-primary" name="select_file">Confirm</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+							<hr>
+							<form action="/chordRecognition" method="POST">
+								<div class="row form-group">
+									<div class="container">
+										<br>
+										<h3>Record Your Audio Right Away</h3>
+										<div class="row">
+											<div class="col-xs-3">
+												{% if value=='1' or value=='4' %}
+												<button type="submit" class="btn btn-primary" name="record_status"
+													value="2">Record</button>
+												{% elif value=='2' %}
+												<button type="submit" class="btn btn-primary" name="record_status"
+													value="3">Stop Recording</button>
+												{% elif value=='3' %}
+												<button type="submit" class="btn btn-primary" name="record_status"
+													value="2">Record</button>
+												{% endif %}
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+							<!-- </div> -->
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<!-- <div id="gtco-subscribe"> -->
+		<!-- <div class="gtco-container">
+			<div class="row animate-box">
+				<div class="col-md-8 col-md-offset-2 text-center gtco-heading">
+					<h2>Subscribe</h2>
+					<p>Be the first to know about the new templates.</p>
+				</div>
+			</div>
+			<div class="row animate-box">
+				<div class="col-md-12">
+					<form class="form-inline">
+						<div class="col-md-4 col-sm-4">
+							<div class="form-group">
+								<label for="email" class="sr-only">Email</label>
+								<input type="email" class="form-control" id="email" placeholder="Your email">
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-4">
+							<div class="form-group">
+								<label for="name" class="sr-only">Name</label>
+								<input type="text" class="form-control" id="name" placeholder="Your name">
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-4">
+							<button type="submit" class="btn btn-default btn-block">Subscribe</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div> -->
+
+
+		<footer id="gtco-footer" role="contentinfo">
+			<div class="gtco-container">
+				<!-- <div class="row row-pb-md">
+				<div class="col-md-2 col-sm-4 col-xs-6 ">
+					<ul class="gtco-footer-links">
+						<li><a href="#">About</a></li>
+						<li><a href="#">Help</a></li>
+						<li><a href="#">Contact</a></li>
+						<li><a href="#">Terms</a></li>
+						<li><a href="#">Meetups</a></li>
+					</ul>
+				</div>
+				<div class="col-md-2 col-sm-4 col-xs-6">
+					<ul class="gtco-footer-links">
+						<li><a href="#">Creative Design</a></li>
+						<li><a href="#">Branding</a></li>
+						<li><a href="#">Illustration</a></li>
+						<li><a href="#">Subscribe</a></li>
+						<li><a href="#">Monthly Event</a></li>
+					</ul>
+				</div>
+				
+				<div class="clearfix visible-xs-block"></div>
+
+				<div class="col-md-2 col-sm-4 col-xs-6">
+					<ul class="gtco-footer-links">
+						<li><a href="#">About</a></li>
+						<li><a href="#">Help</a></li>
+						<li><a href="#">Contact</a></li>
+						<li><a href="#">Terms</a></li>
+						<li><a href="#">Meetups</a></li>
+					</ul>
+				</div>
+
+				<div class="clearfix visible-sm-block"></div>
+
+				<div class="col-md-2 col-sm-4 col-xs-6">
+					<ul class="gtco-footer-links">
+						<li><a href="#">Shop</a></li>
+						<li><a href="#">Privacy</a></li>
+						<li><a href="#">Testimonials</a></li>
+						<li><a href="#">Handbook</a></li>
+						<li><a href="#">Held Desk</a></li>
+					</ul>
+				</div>
+
+				<div class="clearfix visible-xs-block"></div>
+
+				<div class="col-md-2 col-sm-4 col-xs-6">
+					<ul class="gtco-footer-links">
+						<li><a href="#">Find Designers</a></li>
+						<li><a href="#">Find Deelopers</a></li>
+						<li><a href="#">Teams</a></li>
+						<li><a href="#">Advertise</a></li>
+						<li><a href="#">API</a></li>
+					</ul>
+				</div>
+
+				<div class="col-md-2 col-sm-4 col-xs-6">
+					<ul class="gtco-footer-links">
+						<li><a href="#">About</a></li>
+						<li><a href="#">Help</a></li>
+						<li><a href="#">Contact</a></li>
+						<li><a href="#">Terms</a></li>
+						<li><a href="#">Meetups</a></li>
+					</ul>
+				</div>
+				
+			</div> -->
+
+				<div class="row copyright">
+					<div class="col-md-12">
+						<p class="pull-left">
+							<small class="block">&copy; 2019 Chord Recognition.Skripsi Universitas Tarumanagara Fakultas
+								Teknologi Informasi Jurusan Teknik Informatika.</small>
+							<small class="block">Designed by <a href="https://www.instagram.com/chris_mr6/"
+									target="_blank">Chris Muladi Rianto 535160047</a></small>							
+						</p>
+						<p class="pull-right">
+							<ul class="gtco-social-icons pull-right">
+								<li><a href="https://www.facebook.com/chrizz.barca"><i class="icon-facebook"></i></a></li>
+							<li><a href="https://www.instagram.com/chris_mr6/"><i class="icon-instagram"></i></a></li>
+							<li><a href="https://www.linkedin.com/in/chris-muladi-rianto-a18107198/"><i class="icon-linkedin"></i></a></li>
+							</ul>
+						</p>
+					</div>
+				</div>
+
+			</div>
+		</footer>
+	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+	</div>
+
+	<!-- jQuery -->
+	<script src="{{ url_for('static',filename='js/custom-file-input.js') }}"></script>
+	<script src="{{ url_for('static',filename='js/jquery.min.js') }}"></script>
+	<!-- jQuery Easing -->
+	<script src="{{ url_for('static',filename='js/jquery.easing.1.3.js') }}"></script>
+	<!-- Bootstrap -->
+	<script src="{{ url_for('static',filename='js/bootstrap.min.js') }}"></script>
+	<!-- Waypoints -->
+	<script src="{{ url_for('static',filename='js/jquery.waypoints.min.js') }}"></script>
+	<!-- Carousel -->
+	<script src="{{ url_for('static',filename='js/owl.carousel.min.js') }}"></script>
+	<!-- countTo -->
+	<script src="{{ url_for('static',filename='js/jquery.countTo.js') }}"></script>
+	<!-- Magnific Popup -->
+	<script src="{{ url_for('static',filename='js/jquery.magnific-popup.min.js') }}"></script>
+	<script src="{{ url_for('static',filename='js/magnific-popup-options.js') }}"></script>
+	<!-- Main -->
+	<script src="{{ url_for('static',filename='js/main.js') }}"></script>
+
+	<script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+	<script src="{{ url_for('static',filename='js/app.js') }}"></script>
+</body>
+
+</html>
