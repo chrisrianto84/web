@@ -65,7 +65,7 @@ parso==0.5.1
 pbr==5.4.1
 pexpect==4.7.0
 pickleshare==0.7.5
-Pillow==6.1.0
+Pillow==6.2.0
 pip-autoremove==0.9.1
 pipdate==0.3.2
 post==2019.4.13
