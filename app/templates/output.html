@@ -120,12 +120,19 @@
 											Your browser does not support the audio element.
 										</audio>
 									</div>
+									{% if error == '500' %}
+									<div class="container">										
+										<br><h3 style='color:red; font-weight: bold;'> Error Processing Audio Input! </h3>
+										<br><h3 style='color:red; font-weight: bold;'> Your Input Data is too Short OR System Cannot Read Audio Beat Times </h3>
+									</div>
+									{% elif error == '' %}
 									<div class="container">
 										{% for key,value in string_output.iterrows() %}
 										<br> {{value['chords']}}
 										<br>
 										{% endfor %}
 									</div>
+									{% endif %}
 								</div>
 					</div>
 					</form>

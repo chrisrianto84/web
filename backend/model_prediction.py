@@ -9,9 +9,9 @@ def get_prediction():
 
     from keras.models import load_model
 
-    model = load_model('backend/weight.checkpoint4.cont.h5')
-    graph = tf.get_default_graph()
-    print('Load_Model Completed')
+    string_output = ''
+    output=pd.DataFrame(columns=['chords'])
+
     # model._make_predict_function()
     print('Loading images...')
     path = 'app/static/user_input/input_mfccs/'
@@ -26,14 +26,20 @@ def get_prediction():
             img = np.expand_dims(img, axis=0)
             images.append(img)
 
+    if len(os.listdir(path)) < 16:
+        print('Error Audio Length.' + ' Audio Beat is too small')
+        return output, '500'
+
     images = np.vstack(images)
     classes = ['A','A#','A#m','Am','B','Bm','C','C#','C#m','Cm','D','D#',"D#m",'Dm','E','Em','F','F#','F#m','Fm','G','G#','G#m','Gm']
 
-    string_output = ''
-    output=pd.DataFrame(columns=['chords'])
     idx = 0
 
     print('making predictions...')
+
+    model = load_model('backend/model.h5')
+    graph = tf.get_default_graph()
+    print('Load_Model Completed')
 
     with graph.as_default():
         prediction = model.predict_classes(images, batch_size=10)
@@ -41,6 +47,7 @@ def get_prediction():
     bars = 0
     token = 0
     count = 0
+
     for i in prediction:
         print(classes[i])
         if bars == 4:
@@ -53,7 +60,7 @@ def get_prediction():
             token = token+1
             count = count + 1
         elif count == 1:
-            string_output = string_output + '.'
+            string_output = string_output
             count = count+1
         elif count == 3:            
             string_output = string_output+'|'
@@ -67,4 +74,4 @@ def get_prediction():
 
     print(output)
     keras.backend.clear_session()
-    return output
+    return output, ""

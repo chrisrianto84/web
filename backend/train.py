@@ -1,22 +1,20 @@
 import librosa
 
-def trimSilence(x):
-    x, index = librosa.effects.trim(x)
-    return x, index
-
 def librosaLoad(filename):
     x, sr = librosa.load(filename, mono=True)
-    x, index = trimSilence(x)
-    return x, sr, index
+    # yt= librosa.effects.trim(x, top_db=0.1)
+    # x, sr = librosa.load(filename, mono=True, duration=librosa.core.get_duration(yt))
+    # x, index = trimSilence(x)
+    return x, sr
 
 def librosaBeatTempo(x, sr):
-    tempo, beats = librosa.beat.beat_track(x, sr=sr, start_bpm=60, units='time') 
+    tempo, beats = librosa.beat.beat_track(x, sr=sr, start_bpm=80, units='time') 
     return tempo, beats
 
 #Make txt based on Onset time
 #==param==
 #   code = 1 for wav and 2 for mp3
-def getOnset(code):
+def getOnset():
     import os
     from backend.labelling import giveLabels
 
@@ -27,27 +25,20 @@ def getOnset(code):
         #code 1 = .wav
         #code 2 = .mp3
         for file in f:
-            if code == 1:
-                if '.wav' in file:
-                    print(file)
-                    files.append(file)
-            elif code == 2:
-                if '.mp3' in file:
-                    files.append(file)
+            files.append(file)
 
     for i in files:
         print(i)
 
     print("Making beat .txt ")
     for filename in files:
-        x, sr, index = librosaLoad(path+filename)
+        x, sr = librosaLoad(path+filename)
         #get tempo and beat
         tempo, beats = librosaBeatTempo(x, sr)
 
         pathBeat = 'app/static/user_input/beats/'
         tempoFile = open(pathBeat+filename+".txt", "w")
         
-        beats[0]=0.0
         stringBeat = ""
         count=1
         index = 0
@@ -56,7 +47,7 @@ def getOnset(code):
             #     stringBeat = stringBeat+"0.0 "
             if count%2 == 1:
                 if count != 1:
-                    dataTemp = beats[index-1] + 60/tempo
+                    dataTemp = beats[index-1]
                     stringBeat = stringBeat+str(dataTemp)+" "
                 else:
                     stringBeat = stringBeat + str(i)+" "

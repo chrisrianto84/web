@@ -23,7 +23,6 @@ def giveLabels(filename, chords):
 def load_with_librosa_timed(data,start,end):
     import librosa
     x, sr = librosa.load(data,offset=start,duration=end-start, mono=True)
-    x, index = librosa.effects.trim(x)
     return x,sr
 
 def make_mfcc(data, start_time, end_time, path, name):
@@ -41,6 +40,7 @@ def make_mfcc(data, start_time, end_time, path, name):
     print(end_time)
     print('c')
     chromagram = librosa.feature.chroma_cqt(x, sr=sr, hop_length=512)
+    chromagram = librosa.decompose.nn_filter(chromagram, aggregate=np.average)
 #     chromagram_preprocessing = sklearn.preprocessing.normalize(chromagram)
 #     chromagram_preprocessing = sklearn.preprocessing.scale(chromagram, axis=1)
     
@@ -57,7 +57,7 @@ def make_df(filename):
 
     plt_path = "app/static/user_input/input_mfccs/"
 
-    train.getOnset(1)
+    train.getOnset()
 
     dataPath = "app/static/user_input/beats/"+filename+".txt"
     print(dataPath)

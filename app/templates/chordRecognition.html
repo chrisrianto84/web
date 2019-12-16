@@ -134,7 +134,7 @@
 													</svg> <span>Choose a file&hellip;</span></label>
 											</div>
 											<div class="col-xs-6">
-												<button type="submit" class="btn btn-primary" name="select_file">Confirm</button>
+												<button onclick="buttonClickedFile()" type="submit" class="btn btn-primary" name="select_file" id="btConf">Confirm</button>
 											</div>
 										</div>
 									</div>
@@ -152,8 +152,8 @@
 												<button type="submit" class="btn btn-primary" name="record_status"
 													value="2">Record</button>
 												{% elif value=='2' %}
-												<button type="submit" class="btn btn-primary" name="record_status"
-													value="3">Stop Recording</button>
+												<button onclick="buttonClickedRec()" type="submit" class="btn btn-primary" name="record_status"
+													value="3" id="btConfRecord">Stop Recording</button>
 												{% elif value=='3' %}
 												<button type="submit" class="btn btn-primary" name="record_status"
 													value="2">Record</button>
@@ -169,6 +169,15 @@
 
 			</div>
 		</div>
+
+		<script>
+			function buttonClickedFile() {
+				document.getElementById("btConf").innerText = 'Processing...'
+			}
+			function buuttonClickedRec() {
+				document.getElementById("btConfRecord").innerText = "Processing..."
+			}
+		</script>
 
 		<!-- <div id="gtco-subscribe"> -->
 		<!-- <div class="gtco-container">

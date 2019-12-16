@@ -86,7 +86,7 @@ def chordRecognition():
                 # filename = process.communicate()[0].decode("utf-8")
                 # print(filename)
                 time.sleep(5)
-                train.getOnset(1)
+                train.getOnset()
 
                 # r.set('input_file:', filename)
                 
@@ -115,8 +115,11 @@ def output():
     print(filename)
     make_mfcc.make_visualization()
 
-    string_output = model_prediction.get_prediction()
+    string_output, err = model_prediction.get_prediction()
+    if err == '500':
+        print("Audio File too Short, " + err)
+        return render_template('output.html', filename=filename, string_output =  string_output, error = err )
 
-    return render_template('output.html', filename=filename, string_output = string_output)
+    return render_template('output.html', filename=filename, string_output = string_output, error = err)
 
 
