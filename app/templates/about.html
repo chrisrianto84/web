@@ -10,9 +10,9 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>CHORD RECOGNITION &mdash; Recognize Your Chord In One Click, Chris Muladi Rianto 535160047</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Free HTML5 Website Template by FreeHTML5.co" />
-	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
-	<meta name="author" content="FreeHTML5.co" />
+	<meta name="description" content="Chord Recognition by Chris Muladi Rianto" />
+	<meta name="keywords" content="chord recognition, skripsi, untar, machine learning, deep learniing, cnn" />
+	<meta name="Chris Muladi Rianto" content="FreeHTML5.co" />
 
 	
 
@@ -110,7 +110,7 @@
 						</span>
 						<div class="feature-copy">
 							<h3>Tujuan Utama Aplikasi</h3>
-							<p>Melakukan pengenalan data lagu yang dimasukkan oleh user.</p>
+							<p>Melakukan pengenalan akor dari data lagu yang dimasukkan oleh user.</p>
 						</div>
 					</div>
 
@@ -120,7 +120,7 @@
 						</span>
 						<div class="feature-copy">
 							<h3>Fitur Pengenalan: File Upload</h3>
-							<p>Pengenalan akor dapat dilakukan setelah melakukan upload file dari PC anda.</p>
+							<p>Pengenalan akor dapat dilakukan setelah melakukan upload file dari direktori anda.</p>
 						</div>
 					</div>
 
@@ -130,7 +130,7 @@
 						</span>
 						<div class="feature-copy">
 							<h3>Fitur Pengenalan: Audio Recording</h3>
-							<p>Pengenalan akor dapat dilakukan dengan cara merekam secara langsung menggunakan perangkat keras Audio-in pengguna.</p>
+							<p>Pengenalan akor dapat dilakukan dengan cara merekam secara langsung menggunakan perangkat keras Audio Input pengguna.</p>
 						</div>
 					</div>
 				</div>
@@ -143,7 +143,7 @@
 						</span>
 						<div class="feature-copy">
 							<h3>Tidak Memerlukan Instalasi</h3>
-							<p>Aplikasi dapat langsung dilakukan pada laman web <a herf='{{ url_for("chordRecognition") }}'>ini.</a>
+							<p>Aplikasi dapat langsung dilakukan pada laman web <a herf="{{ url_for('chordRecognition') }}">ini.</a>
 						</div>
 					</div>
 
@@ -191,7 +191,11 @@
 		<div class="gtco-container">
 			<div class="row animate-box">
 				<div class="col-md-8 col-md-offset-2 text-center gtco-heading">
-					<h2>Pembuat Program</h2>
+					<h2>Program Studi Teknik Informatika</h2>  
+					<br><h2>Fakultas Teknologi Informasi</h2>
+					<br><h2>Universitas Tarumanagara</h2>
+					<img src="{{ url_for('static',filename='images/logo_untar.png') }}"
+					style="width:200px;height:200px;">
 				</div>
 			</div>
 			<div class="row row-pb-md">
@@ -211,6 +215,7 @@
 				</div>
 				<div class="col-md-4 animate-box" data-animate-effect="fadeIn">
 					<div class="gtco-staff">
+						<h2>Pembuat Program</h2>
 						<img src="{{ url_for('static',filename='images/chris.jpg') }}" alt="Free HTML5 Templates by freehtml5.co">
 						<h3>Chris Muladi Rianto</h3>
 						<h4>535160047</h4>
@@ -235,6 +240,31 @@
 							<li><a href="#"><i class="icon-github"></i></a></li>
 						</ul>
 					</div> -->
+				</div>
+			</div>
+	</div>
+
+	<div id="gtco-team" class="gtco-section">
+		<div class="gtco-container">
+			<div class="row animate-box">
+				<div class="col-md-8 col-md-offset-2 text-center gtco-heading">
+					<h2>Dosen Pembimbing</h2>
+				</div>
+			</div>
+			<div class="row row-pb-md">
+				<div class="col-md-6 animate-box" data-animate-effect="fadeIn">
+					<div class="gtco-staff">
+						<img src="{{ url_for('static',filename='images/viny.jpg') }}" alt="Free HTML5 Templates by freehtml5.co">
+						<h3>Viny Christanti, M.Kom</h3>
+						<p>Dosen Fakultas Teknologi Informasi Universitas Tarumanagara</p>
+					</div>
+				</div>
+				<div class="col-md-6 animate-box" data-animate-effect="fadeIn">
+					<div class="gtco-staff">
+						<img src="{{ url_for('static',filename='images/janson.jpg') }}" alt="Free HTML5 Templates by freehtml5.co">
+						<h3>Janson Hendryli, S.Kom.,M.Kom</h3>
+						<p>Dosen Fakultas Teknologi Informasi Universitas Tarumanagara</p>
+					</div>
 				</div>
 			</div>
 	</div>

@@ -18,13 +18,20 @@ def get_prediction():
     img_width = 200
     img_height = 200
     images = []
+    image_name = []
+
     for img in os.listdir(path):
         if img != '.DS_Store':
-            img = os.path.join(path, img)
-            img = image.load_img(img, target_size=(img_width, img_height))
-            img = image.img_to_array(img)
-            img = np.expand_dims(img, axis=0)
-            images.append(img)
+            image_name.append(int(os.path.splitext(img)[0]))
+
+    image_name.sort()
+
+    for img in image_name:
+        img = os.path.join(path, str(img))+'.png'
+        img = image.load_img(img, target_size=(img_width, img_height))
+        img = image.img_to_array(img)
+        img = np.expand_dims(img, axis=0)
+        images.append(img)
 
     if len(os.listdir(path)) < 16:
         print('Error Audio Length.' + ' Audio Beat is too small')
@@ -37,7 +44,7 @@ def get_prediction():
 
     print('making predictions...')
 
-    model = load_model('backend/model.h5')
+    model = load_model('backend/model2.h5')
     graph = tf.get_default_graph()
     print('Load_Model Completed')
 
