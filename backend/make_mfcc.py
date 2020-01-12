@@ -45,11 +45,10 @@ def make_mfcc(data, start_time, end_time, path, name):
 #     chromagram_preprocessing = sklearn.preprocessing.scale(chromagram, axis=1)
     
     path_full_name = path+name
-#     mfccs = librosa.display.specshow(mfccs)
-    chromagram = librosa.display.specshow(chromagram, y_axis='chroma')
-#     plt.gray()
+    mfccs = librosa.display.specshow(mfccs)
+    plt.gray()
     plt.savefig(path_full_name,dpi=46)
-    return chromagram
+    return mfccs
 
 def make_df(filename):
     import pandas as pd

@@ -76,8 +76,6 @@ def get_prediction():
         else:
             string_output = string_output+classes[i]+'.'
             count = count + 1
-        
-    # string_output = string_output.replace('\\n','<br />')
 
     print(output)
     keras.backend.clear_session()
