@@ -31,21 +31,25 @@ def make_mfcc(data, start_time, end_time, path, name):
     import sklearn
     import matplotlib.pyplot as plt
     x, sr = load_with_librosa_timed(data, start_time, end_time)
-    mfccs = librosa.feature.mfcc(x, sr=sr)
+#     mfccs = librosa.feature.mfcc(x, sr=sr)
     
-    mfccs = sklearn.preprocessing.normalize(mfccs)
-    mfccs = sklearn.preprocessing.scale(mfccs, axis=1)
+#     mfccs = sklearn.preprocessing.normalize(mfccs)
+#     mfccs = sklearn.preprocessing.scale(mfccs, axis=1)
     print('c')
     print(start_time)
     print(end_time)
     print('c')
-   
-    path_full_name = path+name
-    mfccs = librosa.display.specshow(mfccs)
+    chromagram = librosa.feature.chroma_cqt(x, sr=sr, hop_length=512)
+    chromagram = librosa.decompose.nn_filter(chromagram, aggregate=np.average)
+#     chromagram_preprocessing = sklearn.preprocessing.normalize(chromagram)
+#     chromagram_preprocessing = sklearn.preprocessing.scale(chromagram, axis=1)
     
+    path_full_name = path+name
+#     mfccs = librosa.display.specshow(mfccs)
+    chromagram = librosa.display.specshow(chromagram, y_axis='chroma')
 #     plt.gray()
     plt.savefig(path_full_name,dpi=46)
-    return mfccs
+    return chromagram
 
 def make_df(filename):
     import pandas as pd
